@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שלב 6 - תחקור תקלה במערכת</title>
+    <style>
+        /* עיצוב כללי */
+        body {
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .solution-container {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            max-width: 950px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            direction: rtl;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            padding-bottom: 120px; /* רווח לסרגל הניווט */
+        }
+
+        header {
+            border-bottom: 3px solid #ef4444;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        header h1 { color: #991b1b; font-size: 28px; margin: 0; }
+        .subtitle { color: #64748b; font-size: 16px; margin-top: 5px; }
+
+        .ticket-box {
+            background: #fff5f5;
+            border: 1px solid #fecaca;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ticket-icon { font-size: 24px; }
+
+        .task-section {
+            margin-bottom: 35px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .task-header {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-num {
+            background: #ef4444;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .task-title { font-weight: bold; color: #1e40af; font-size: 18px; }
+
+        .answer-box {
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .answer-label {
+            display: inline-block;
+            background: #fef2f2;
+            color: #b91c1c;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid #fee2e2;
+        }
+
+        .answer-content { font-size: 15px; line-height: 1.6; }
+        .answer-content ul { padding-right: 20px; margin: 10px 0; }
+        .answer-content li { margin-bottom: 12px; }
+
+        .check-step { color: #b91c1c; font-weight: 600; }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* סרגל ניווט */
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1); display: flex; justify-content: center;
+            align-items: center; gap: 30px; direction: rtl; z-index: 1000;
+        }
+        .btn-nav { padding: 10px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; cursor: pointer; }
+        .btn-prev { color: #1e40af; border: 1px solid #1e40af; background: white; }
+        .btn-next { background: #1e40af; color: white !important; border: none; }
+        .btn-next:hover { background: #1e3a8a; transform: translateY(-2px); }
+        .progress-text { font-size: 14px; color: #64748b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="solution-container">
+    <header>
+        <h1>חלק ד': תחקור תקלה במערכת (Troubleshooting)</h1>
+        <p class="subtitle">ניהול הרשאות וגישה למידע במערכת ה-CRM</p>
+    </header>
+
+    <div class="ticket-box">
+        <span class="ticket-icon">🚨</span>
+        <div>
+            <strong>דיווח על תקלה:</strong>
+            <span>"משתמש (נציג מחלקה משפטית) מדווח כי אינו רואה פניות שהוא אמור לטפל בהן בלוח הבקרה."</span>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">?</div>
+            <div class="task-title">מתודולוגיית בדיקה: מה תבדוק/י?</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">צ'ק-ליסט לפתרון התקלה</span>
+            <div class="answer-content">
+                <ul>
+                    <li>
+                        <span class="check-step">1. בדיקת פרופיל ותפקיד (Profile & Role):</span>
+                        האם המשתמש משויך לתפקיד הנכון בהיררכיה הארגונית? האם הפרופיל שלו כולל הרשאות קריאה (Read) על אובייקט "פניות"?
+                    </li>
+                    <li>
+                        <span class="check-step">2. הגדרות שיתוף (Sharing Rules):</span>
+                        האם המערכת מוגדרת כ"פרטית" (Private)? אם כן, האם קיים כלל שיתוף המעביר פניות מסוג "משפטי" לקבוצה אליה המשתמש שייך?
+                    </li>
+                    <li>
+                        <span class="check-step">3. בעלות על רשומות (Ownership):</span>
+                        מי הבעלים של הפניות החסרות? האם הן משויכות לתור (Queue) שהמשתמש אינו חבר בו?
+                    </li>
+                    <li>
+                        <span class="check-step">4. סינון תצוגה (List View Filters):</span>
+                        בדיקה פשוטה אך קריטית: האם המשתמש נמצא בתצוגה (View) עם פילטר שגוי? (למשל: "הפניות שלי" במקום "כל הפניות המשפטיות").
+                    </li>
+                    <li>
+                        <span class="check-step">5. בדיקת "Login As":</span>
+                        כניסה למערכת בשם המשתמש (במידה וההרשאות מאפשרות) כדי לוודא אם מדובר בבעיית הרשאות גורפת או בטעות אנוש בשימוש במערכת.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">💡</div>
+            <div class="task-title">טיפ למראיין: מה לחפש בתשובת המועמד?</div>
+        </div>
+        <div class="answer-box">
+            <div class="answer-content">
+                <p>חפש מועמד שלא רץ ישר "להוסיף הרשאות", אלא קודם כל <b>מבודד את הבעיה</b>. מועמד טוב יבדיל בין הרשאת גישה לאובייקט לבין הרשאת גישה לרשומה ספציפית.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        יוחנן צביליחובסקי | חלק ד' - ניתוח תקלות
+    </div>
+</div>
+
+<div class="nav-bar">
+    <a href="page5.html" class="btn-nav btn-prev">⬅ חזרה לשלב 5</a>
+    <div class="progress-text">שלב 6 מתוך 9</div>
+    <a href="page7.html" class="btn-nav btn-next">הבא: שלב 7 ➔</a>
+</div>
+
+</body>
+</html>

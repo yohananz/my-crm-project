@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שלב 7.5 - סיכום נתונים מלא</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f0f4f8; font-family: 'Segoe UI', system-ui, sans-serif; padding-bottom: 100px; }
+        .dashboard-wrapper { max-width: 800px; margin: 40px auto; }
+        .crm-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; border: none; }
+        .card-header-custom { background: #1e40af; color: white; padding: 25px; text-align: center; }
+        .info-section { padding: 30px; }
+        .section-title { color: #1e40af; font-weight: bold; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 20px; font-size: 1.1rem; }
+        .data-row { margin-bottom: 15px; }
+        .data-label { color: #64748b; font-size: 0.85rem; font-weight: 600; display: block; }
+        .data-value { color: #1e293b; font-weight: bold; font-size: 1.05rem; }
+        .highlight-value { color: #ef4444; } /* אדום לסכום הקנס */
+        
+        /* סרגל ניווט */
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px; display: flex; justify-content: center; gap: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 1000; }
+        .btn-nav { padding: 10px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <div class="crm-card">
+        <div class="card-header-custom">
+            <h2 class="h4 mb-0">✓ סנכרון נתונים בוצע בהצלחה</h2>
+            <p class="small mb-0 opacity-75">כל פרטי הפנייה נשמרו ב-Object (JSON) המקומי</p>
+        </div>
+        
+        <div class="info-section">
+            <div class="section-title">👤 פרטי זיהוי וקשר</div>
+            <div class="row">
+                <div class="col-6 data-row">
+                    <span class="data-label">שם מלא:</span>
+                    <span id="disp-name" class="data-value">-</span>
+                </div>
+                <div class="col-6 data-row">
+                    <span class="data-label">תעודת זהות:</span>
+                    <span id="disp-id" class="data-value">-</span>
+                </div>
+                <div class="col-6 data-row">
+                    <span class="data-label">טלפון נייד:</span>
+                    <span id="disp-phone" class="data-value">-</span>
+                </div>
+                <div class="col-6 data-row">
+                    <span class="data-label">אימייל:</span>
+                    <span id="disp-email" class="data-value">-</span>
+                </div>
+            </div>
+
+            <div class="section-title mt-4">📄 פרטי הדיווח והקנס</div>
+            <div class="row">
+                <div class="col-6 data-row">
+                    <span class="data-label">מספר דוח:</span>
+                    <span id="disp-report" class="data-value">-</span>
+                </div>
+                <div class="col-6 data-row">
+                    <span class="data-label">סכום הקנס:</span>
+                    <span id="disp-amount" class="data-value highlight-value">-</span>
+                </div>
+                <div class="col-6 data-row">
+                    <span class="data-label">מספר רכב:</span>
+                    <span id="disp-car" class="data-value">-</span>
+                </div>
+                <div class="col-6 data-row">
+                    <span class="data-label">סוג בקשה:</span>
+                    <span id="disp-type" class="data-value text-primary">-</span>
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-4 mb-0 text-center py-2" style="font-size: 0.9rem;">
+                <strong>סטטוס:</strong> הפנייה מוכנה לשידור למסד הנתונים
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nav-bar">
+    <a href="page7.html" class="btn btn-outline-primary btn-nav">⬅ עריכת פרטים</a>
+    <a href="page8.html" class="btn btn-primary btn-nav">המשך ללוח בקרה מנהל ➔</a>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // משיכת ה-JSON ששמרנו ב-page7
+        const rawData = localStorage.getItem('fullCrmRecord');
+        
+        if (rawData) {
+            const data = JSON.parse(rawData); // הופך את הטקסט בחזרה לאובייקט
+            
+            // הצבת הנתונים בשדות המתאימים
+            document.getElementById('disp-name').innerText = data.fullName;
+            document.getElementById('disp-id').innerText = data.idNumber;
+            document.getElementById('disp-phone').innerText = data.phone;
+            document.getElementById('disp-email').innerText = data.email;
+            document.getElementById('disp-report').innerText = data.reportNum;
+            document.getElementById('disp-amount').innerText = Number(data.amount).toLocaleString() + " ₪";
+            document.getElementById('disp-car').innerText = data.carNum;
+            document.getElementById('disp-type').innerText = data.requestType;
+            
+            console.log("סנכרון נתונים מלא הושלם.");
+        } else {
+            alert("לא נמצאו נתונים בזיכרון. אנא חזור לדף הקודם ומלא את הטופס.");
+        }
+    });
+</script>
+
+</body>
+</html>

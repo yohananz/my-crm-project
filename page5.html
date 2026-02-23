@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שלב 5 - ניתוח נתונים ובקרת מנהלים</title>
+    <style>
+        /* עיצוב כללי */
+        body {
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .solution-container {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            max-width: 950px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            direction: rtl;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            padding-bottom: 120px; /* רווח לסרגל הניווט */
+        }
+
+        header {
+            border-bottom: 3px solid #6366f1;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        header h1 { color: #312e81; font-size: 28px; margin: 0; }
+        .subtitle { color: #64748b; font-size: 16px; margin-top: 5px; }
+
+        .task-section {
+            margin-bottom: 35px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .task-header {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-num {
+            background: #6366f1;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .task-title { font-weight: bold; color: #1e40af; font-size: 18px; }
+
+        .answer-box {
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .answer-label {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid #e0e7ff;
+        }
+
+        .answer-content { font-size: 15px; line-height: 1.6; }
+        .answer-content ul { padding-right: 20px; margin: 10px 0; }
+        .answer-content li { margin-bottom: 8px; }
+
+        .highlight { color: #4f46e5; font-weight: 600; }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* סרגל ניווט */
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1); display: flex; justify-content: center;
+            align-items: center; gap: 30px; direction: rtl; z-index: 1000;
+        }
+        .btn-nav { padding: 10px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; cursor: pointer; }
+        .btn-prev { color: #1e40af; border: 1px solid #1e40af; background: white; }
+        .btn-next { background: #1e40af; color: white !important; border: none; }
+        .btn-next:hover { background: #1e3a8a; transform: translateY(-2px); }
+        .progress-text { font-size: 14px; color: #64748b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="solution-container">
+    <header>
+        <h1>חלק ג': ניתוח נתונים ובקרת מנהלים (BI & Reporting)</h1>
+        <p class="subtitle">הפקת תובנות עסקיות ומדדי ביצוע מהתהליכים שהוטמעו</p>
+    </header>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">1</div>
+            <div class="task-title">מדדי ביצוע מרכזיים (KPIs)</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">תשובה לדוגמה</span>
+            <div class="answer-content">
+                אילו 3 מדדים היית מציג/ה למנכ"ל העירייה כדי לשקף את יעילות המוקד?
+                <ul>
+                    <li><span class="highlight">זמן סבב ממוצע (Lead Time):</span> הזמן מרגע פתיחת בקשה ועד לאישורה הסופי.</li>
+                    <li><span class="highlight">אחוז חריגה מ-SLA:</span> כמות הבקשות שלא טופלו בזמן המוגדר בכל תחנה.</li>
+                    <li><span class="highlight">התפלגות עומסים:</span> זיהוי המחלקה המהווה "צוואר בקבוק" (למשל: איפה בקשות עומדות הכי הרבה זמן).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">2</div>
+            <div class="task-title">אפיון לוח בקרה (Dashboard)</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">תשובה לדוגמה</span>
+            <div class="answer-content">
+                תאר/י אילו רכיבים ויזואליים היית מטמיע/ה בדף הבית של מנהל אגף הביטחון:
+                <ul>
+                    <li><b>גרף עוגה:</b> סטטוס הפניות הפתוחות בחלוקה לפי דחיפות.</li>
+                    <li><b>מונה (Gauge):</b> מספר האירועים המאושרים המתקיימים היום בשטח העיר.</li>
+                    <li><b>רשימת התראות:</b> "5 בקשות דחופות שממתינות מעל 4 שעות".</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">3</div>
+            <div class="task-title">ניתוח מגמות ושיפור תהליכים</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">תשובה לדוגמה</span>
+            <div class="answer-content">
+                איך היית משתמש/ת בנתונים כדי להמליץ על שינוי בתהליך העבודה?
+                <p>במידה והנתונים מראים כי 90% מהבקשות שמועברות לעו"ד סנדרוביץ' מאושרות ללא הערות, הייתי ממליץ/ה על <span class="highlight">אוטומציה מלאה</span> של סוגי פניות מסוימים או קביעת "מסלול ירוק" ללא צורך באישור ידני, ובכך חוסך/ת זמן יקר ומשאבים.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        יוחנן צביליחובסקי | חלק ג' - ניתוח ובקרה
+    </div>
+</div>
+
+<div class="nav-bar">
+    <a href="page4.html" class="btn-nav btn-prev">⬅ חזרה לשלב 4</a>
+    <div class="progress-text">שלב 5 מתוך 9</div>
+    <a href="page6.html" class="btn-nav btn-next">הבא: שלב 6 ➔</a>
+</div>
+
+</body>
+</html>

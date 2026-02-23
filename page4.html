@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שלב 4 - פתרון מוצע ויישום לוגי</title>
+    <style>
+        .solution-container {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            max-width: 950px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            direction: rtl;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            padding-bottom: 120px; /* מקום לסרגל הניווט */
+        }
+
+        header {
+            border-bottom: 3px solid #10b981;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        header h1 { color: #064e3b; font-size: 28px; margin: 0; }
+        .subtitle { color: #64748b; font-size: 16px; margin-top: 5px; }
+
+        .task-section {
+            margin-bottom: 35px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .task-header {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-num {
+            background: #10b981;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .task-title { font-weight: bold; color: #1e40af; font-size: 18px; }
+
+        .answer-box {
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .answer-label {
+            display: inline-block;
+            background: #ecfdf5;
+            color: #047857;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid #d1fae5;
+        }
+
+        .answer-content { font-size: 15px; line-height: 1.6; }
+        .answer-content ul, .answer-content ol { padding-right: 20px; margin: 10px 0; }
+        .answer-content li { margin-bottom: 8px; }
+
+        .highlight { color: #059669; font-weight: 600; }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* סרגל ניווט */
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1); display: flex; justify-content: center;
+            align-items: center; gap: 30px; direction: rtl; z-index: 1000;
+        }
+        .btn-nav { padding: 10px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; }
+        .btn-prev { color: #1e40af; border: 1px solid #1e40af; }
+        .btn-next { background: #1e40af; color: white !important; }
+        .btn-next:hover { background: #1e3a8a; transform: translateY(-2px); }
+        .progress-text { font-size: 14px; color: #64748b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="solution-container">
+    <header>
+        <h1>פתרון מוצע: יישום תהליך אישור אירוע</h1>
+        <p class="subtitle">אפיון טכני ולוגיקת מערכת למיישם אפליקטיבי</p>
+    </header>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">1</div>
+            <div class="task-title">שלבי התהליך (Workflow Stages)</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">תשובה לדוגמה</span>
+            <div class="answer-content">
+                <ol>
+                    <li><span class="highlight">הזנת נתונים:</span> העובד ממלא טופס דיגיטלי.</li>
+                    <li><span class="highlight">בדיקת תקינות:</span> אימות אוטומטי של שדות חובה (ולידציה).</li>
+                    <li><span class="highlight">סבב אישור ניהולי:</span> שליחה למנהל הישיר של העובד.</li>
+                    <li><span class="highlight">סבב אישור מקצועי:</span> לאחר אישור המנהל, הפנייה עוברת אוטומטית לאגף ביטחון.</li>
+                    <li><span class="highlight">חתימה וסגירה:</span> הפקה אוטומטית של אישור האירוע ושליחתו במייל.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">2</div>
+            <div class="task-title">סטטוסים בתהליך</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">תשובה לדוגמה</span>
+            <div class="answer-content">
+                <ul>
+                    <li><b>טיוטה (Draft):</b> הבקשה נשמרה אך טרם הוגשה.</li>
+                    <li><b>ממתין לאישור מנהל:</b> הבקשה הוגשה ונמצאת בתור של המנהל.</li>
+                    <li><b>בבדיקת ביטחון:</b> המנהל אישר, כעת בטיפול קצין ביטחון.</li>
+                    <li><b>דרוש תיקון (Rework):</b> הבקשה הוחזרה לעובד להשלמת פרטים.</li>
+                    <li><b>אושר / נדחה:</b> סטטוסים סופיים של התהליך.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">3</div>
+            <div class="task-title">שדות בטופס הבקשה</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">תשובה לדוגמה</span>
+            <div class="answer-content">
+                <ul>
+                    <li><b>פרטים כלליים:</b> שם האירוע, תאריך ושעה (התחלה/סיום).</li>
+                    <li><b>מיקום:</b> בחירה מרשימה (אולם, שטח פתוח, חניון).</li>
+                    <li><b>כמות משתתפים צפויה:</b> שדה מספרי (קריטי להערכת סיכון ביטחוני).</li>
+                    <li><b>צורך באבטחה/גידור:</b> שדה מסוג Yes/No.</li>
+                    <li><b>איש קשר בשטח:</b> שם וטלפון זמין בזמן האירוע.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">4</div>
+            <div class="task-title">תנאי עצירה וחזרה (Exceptions)</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">תשובה לדוגמה</span>
+            <div class="answer-content">
+                <ul>
+                    <li><span class="highlight">חזרה לתיקון:</span> במידה והמנהל דוחה, המערכת מחייבת אותו להזין "סיבת דחייה" ומחזירה את הבקשה לסטטוס 'טיוטה' אצל העובד.</li>
+                    <li><span class="highlight">חסימת הגשה:</span> אם התאריך המבוקש חל בתוך פחות מ-48 שעות (לא עומד ב-SLA), המערכת לא תאפשר הגשת בקשה.</li>
+                    <li><span class="highlight">עצירת ביטחון:</span> אם הוזנה כמות משתתפים מעל 500 איש, המערכת תעצור את התהליך ותדרוש צירוף "אישור מהנדס בטיחות" כחובה.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="task-header">
+            <div class="task-num">5</div>
+            <div class="task-title">מערך התראות (Notifications)</div>
+        </div>
+        <div class="answer-box">
+            <span class="answer-label">תשובה לדוגמה</span>
+            <div class="answer-content">
+                <ul>
+                    <li><span class="highlight">למאשר:</span> מייל מיידי עם קישור ישיר לאישור (Deep Link) ברגע שהבקשה מגיעה לתור שלו.</li>
+                    <li><span class="highlight">לעובד:</span> הודעת SMS/מייל בכל שינוי סטטוס (אושר ע"י מנהל, עבר לביטחון).</li>
+                    <li><span class="highlight">תזכורת SLA:</span> אם בקשה עומדת בסטטוס "ממתין" מעל 24 שעות, שליחת תזכורת אוטומטית למאשר.</li>
+                    <li><span class="highlight">אישור סופי:</span> מייל עם קובץ PDF חתום המהווה "רישיון אירוע".</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        יוחנן וגלית ראיון עבודה פברואר 2026
+    </div>
+</div>
+
+<div class="nav-bar">
+    <a href="page3.html" class="btn-nav btn-prev">⬅ חזרה לשלב 3</a>
+    <div class="progress-text">שלב 4 מתוך 9</div>
+    <a href="page5.html" class="btn-nav btn-next">הבא: שלב 5 ➔</a>
+</div>
+
+</body>
+</html>
