@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שלב 1 - אפיון התהליך</title>
+    <style>
+        body { background-color: #f8fafc; margin: 0; padding: 0; }
+        
+        .test-container {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            direction: rtl;
+            border-top: 10px solid #1e40af;
+            padding-bottom: 120px;
+        }
+
+        header {
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+
+        h1 { color: #1e40af; margin: 0; font-size: 26px; }
+        h2 { 
+            color: #3b82f6; 
+            font-size: 20px; 
+            margin-top: 40px; 
+            border-right: 5px solid #3b82f6; 
+            padding-right: 15px; 
+            background: #f8fafc; 
+            padding-top: 10px; 
+            padding-bottom: 10px; 
+        }
+
+        .section-box {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* סעיף 1: שדות */
+        .grid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .field-list { list-style: none; padding: 0; }
+        .field-list li { padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 15px; }
+        .field-list li::before { content: "🔹"; margin-left: 8px; }
+        .required { color: #ef4444; font-weight: bold; font-size: 12px; margin-right: 5px; }
+
+        /* סעיף 2: שלבים */
+        .step-item { display: flex; gap: 15px; margin-bottom: 20px; }
+        .step-num { background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: bold; }
+        .step-text b { color: #1e40af; display: block; margin-bottom: 4px; }
+
+        /* סעיף 3: סטטוסים */
+        .status-wrapper { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .status-tag { padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 600; border: 1px solid #cbd5e1; }
+        .st-new { background: #dcfce7; color: #166534; }
+        .st-work { background: #fef9c3; color: #854d0e; }
+        .st-ext { background: #ffedd5; color: #9a3412; }
+        .st-done { background: #f1f5f9; color: #475569; }
+
+        /* סעיף 4: גורמים */
+        .stakeholders-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .stakeholder-card { border: 1px dashed #3b82f6; padding: 15px; border-radius: 8px; text-align: center; }
+        .stakeholder-card strong { color: #1e40af; display: block; }
+
+        /* סעיף 5: ייעול */
+        .opt-list { list-style: none; padding: 0; }
+        .opt-item { background: #f0f9ff; margin-bottom: 10px; padding: 15px; border-radius: 8px; border-right: 4px solid #0ea5e9; }
+        .opt-item b { color: #0369a1; }
+
+        /* ניווט */
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1); display: flex; justify-content: center;
+            align-items: center; gap: 30px; direction: rtl; z-index: 1000;
+        }
+        .btn-nav { padding: 10px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; }
+        .btn-prev { color: #1e40af; border: 1px solid #1e40af; }
+        .btn-next { background: #1e40af; color: white !important; }
+        .btn-next:hover { background: #1e3a8a; transform: translateY(-2px); }
+        .progress-text { font-size: 14px; color: #64748b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="test-container">
+    <header>
+        <h1>חלק 1: אפיון תהליך מוקד קנסות חניה</h1>
+        <p>מעבר מניהול מבוסס מיילים למערכת CRM מוסדרת</p>
+    </header>
+
+    <h2>1. שדות בטופס פתיחת פנייה (Data Fields)</h2>
+    <div class="section-box grid-fields">
+        <div>
+            <strong>פרטי זיהוי וקשר:</strong>
+            <ul class="field-list">
+                <li>שם מלא</li>
+                <li>תעודת זהות <span class="required">*</span></li>
+                <li>טלפון נייד <span class="required">*</span></li>
+                <li>כתובת אימייל (לעדכונים) <span class="required">*</span></li>
+            </ul>
+        </div>
+        <div>
+            <strong>פרטי הדיווח:</strong>
+            <ul class="field-list">
+                <li>מספר דוח / קנס <span class="required">*</span></li>
+                <li>מספר רכב</li>
+                <li>סוג בקשה (רשימה סגורה) <span class="required">*</span></li>
+                <li>קבצים מצורפים (צילומים/מסמכים)</li>
+            </ul>
+        </div>
+    </div>
+
+    
+
+    <h2>2. שלבי הטיפול (Process Workflow)</h2>
+    <div class="section-box">
+        <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text"><b>קליטה וניתוב:</b> הפנייה נקלטת מהתושב ומנותבת אוטומטית לפי סוג הבקשה למחלקה המתאימה.</div>
+        </div>
+        <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text"><b>בחינה מקצועית:</b> בדיקת הנתונים והמסמכים ע"י הגורם המטפל (מוקד, משפטית או עו"ד חיצוני).</div>
+        </div>
+        <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text"><b>סגירה ודיווח:</b> קבלת החלטה סופית ושליחת הודעה אוטומטית (מייל/SMS) לתושב על סיום הטיפול.</div>
+        </div>
+    </div>
+
+    
+
+    <h2>3. סטטוסים לניהול ובקרה</h2>
+    <div class="section-box">
+        <div class="status-wrapper">
+            <div class="status-tag st-new">פנייה חדשה</div>
+            <div class="status-tag st-work">בטיפול מוקד</div>
+            <div class="status-tag st-ext">בטיפול עו"ד סנדרוביץ</div>
+            <div class="status-tag st-ext">בטיפול מחלקה משפטית</div>
+            <div class="status-tag st-done">טופל - נשלח עדכון</div>
+        </div>
+    </div>
+
+    <h2>4. הגורמים המעורבים (Stakeholders)</h2>
+    <div class="section-box stakeholders-grid">
+        <div class="stakeholder-card"><strong>תושב</strong></div>
+        <div class="stakeholder-card"><strong>מוקדן</strong></div>
+        <div class="stakeholder-card"><strong>עו"ד חיצוני</strong></div>
+        <div class="stakeholder-card"><strong>מחלקה משפטית</strong></div>
+    </div>
+
+    <h2>5. הצעות לייעול התהליך</h2>
+    <div class="section-box">
+        <ul class="opt-list">
+            <li class="opt-item"><b>ממשק תשלום מהיר:</b> הוספת לינק לתשלום ישיר מתוך הודעת ה-SMS/מייל שהתושב מקבל בסיום הבדיקה במידה והקנס נותר בעינו.</li>
+            <li class="opt-item"><b>אוטומציית מסמכים:</b> הפקה אוטומטית של מכתב החלטה רשמי המבוסס על שדות המערכת ללא צורך בהקלדה ידנית.</li>
+            <li class="opt-item"><b>מדידת SLA:</b> הגדרת התראות למנהלים על פניות הממתינות מעל 48 שעות ללא שינוי סטטוס כדי למנוע "צווארי בקבוק".</li>
+        </ul>
+    </div>
+
+    <div class="footer-info">
+        אפיון מערכת CRM - יוחנן צביליחובסקי | שלב 1 מתוך 9
+    </div>
+</div>
+
+<div class="nav-bar">
+    <a href="index.html" class="btn-nav btn-prev">⬅ חזרה ל-Hub</a>
+    <div class="progress-text">שלב 1 מתוך 9</div>
+    <a href="page2.html" class="btn-nav btn-next">הבא: שלב 2 ➔</a>
+</div>
+
+</body>
+</html>
