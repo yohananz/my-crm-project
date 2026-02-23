@@ -2,32 +2,126 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>שלב 2 - יישום</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שלב 2 - יישום טכני וארכיטקטורה</title>
     <style>
-        /* כאן העיצוב הכחול (Launch Container) */
-        .launch-container { font-family: sans-serif; max-width: 900px; margin: 20px auto; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); direction: rtl; border: 1px solid #e2e8f0; padding-bottom: 80px; }
-        .hero-banner { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 40px; color: white; text-align: center; }
-        .content-body { padding: 30px 40px; }
-        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px; display: flex; justify-content: center; gap: 30px; direction: rtl; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); }
-        .btn-nav { padding: 10px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        body { background-color: #f8fafc; margin: 0; padding: 0; }
+        .launch-container { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            max-width: 950px; 
+            margin: 40px auto; 
+            background: white; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            direction: rtl; 
+            border: 1px solid #e2e8f0; 
+            padding-bottom: 100px; 
+        }
+        .hero-banner { 
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); 
+            padding: 50px 40px; 
+            color: white; 
+            text-align: center; 
+        }
+        .hero-banner h1 { margin: 0; font-size: 32px; }
+        .hero-banner p { opacity: 0.9; margin-top: 10px; font-size: 18px; }
+
+        .content-body { padding: 40px; }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .tech-card {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 5px solid #1e40af;
+        }
+
+        .tech-card h3 { color: #1e40af; margin-top: 0; font-size: 1.1rem; }
+        .tech-card ul { padding-right: 20px; margin-bottom: 0; }
+        .tech-card li { margin-bottom: 8px; font-size: 0.95rem; color: #334155; }
+
+        .logic-box {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        .logic-box h3 { color: #9a3412; margin-top: 0; }
+
+        .nav-bar { 
+            position: fixed; 
+            bottom: 0; left: 0; right: 0; 
+            background: white; 
+            padding: 15px; 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+            direction: rtl; 
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1); 
+            z-index: 1000;
+        }
+        .btn-nav { padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s; }
         .btn-prev { color: #1e40af; border: 1px solid #1e40af; }
         .btn-next { background: #1e40af; color: white !important; }
+        .btn-next:hover { background: #1e3a8a; transform: translateY(-2px); }
     </style>
 </head>
 <body>
     <div class="launch-container">
         <div class="hero-banner">
-            <h1>שלב 2: יישום והטמעת התהליך</h1>
+            <h1>שלב 2: יישום והטמעת הארכיטקטורה</h1>
+            <p>הפיכת האפיון התיאורטי לישויות (Objects) ולוגיקה במערכת ה-CRM</p>
         </div>
+        
         <div class="content-body">
-            <h2>ברוכים הבאים לשלב היישום</h2>
-            <p>כאן מתחיל החלק הטכני של בניית המערכת.</p>
+            <h2 class="text-primary">מבנה נתונים ורכיבי ליבה</h2>
+            <p>בשלב היישום, תרגמתי את דרישות המוקד למבנה נתונים קשיח המבטיח שלמות נתונים (Data Integrity) וחוויית משתמש יעילה.</p>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>🏗️ בניית אובייקטים ושדות</h3>
+                    <ul>
+                        <li><strong>אובייקט פניות (Cases):</strong> התאמה אישית של שדות לסוגי עבירה, מספרי דוח ופרטי רכב.</li>
+                        <li><strong>קשרים (Relationships):</strong> חיבור אוטומטי בין הפנייה לכרטיס התושב (Account/Contact).</li>
+                        <li><strong>רשימות בחירה (Picklists):</strong> הגדרת סטטוסים מנוהלים (חדש, בטיפול, משפטי, סגור).</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <h3>⚙️ אוטומציה ותהליכים</h3>
+                    <ul>
+                        <li><strong>Email-to-Case:</strong> הקמה אוטומטית של פנייה ברגע קבלת מייל מהתושב.</li>
+                        <li><strong>חוקי ניתוב (Assignment Rules):</strong> העברת פניות דחופות ישירות לצוות מנהלים.</li>
+                        <li><strong>התראות (Alerts):</strong> שליחת SMS אוטומטי לתושב עם קבלת מספר פנייה לבירור.</li>
+                    </ul>
+                </div>
+            </div>
+
+            
+
+            <div class="logic-box">
+                <h3>💡 בקרת איכות (Validation Rules)</h3>
+                <p>כדי למנוע טעויות אנוש של המוקדנים, הוטמעו חוקי אימות:</p>
+                <ul>
+                    <li>מניעת סגירת פנייה ללא הזנת "סיבת סגירה" ותוצאת הבירור.</li>
+                    <li>חובת צירוף מסמך (נספח) עבור בקשות מסוג "ערעור משפטי".</li>
+                    <li>וולידציה על פורמט תקין של מספר דוח ומספר רכב.</li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <div class="nav-bar">
         <a href="page1.html" class="btn-nav btn-prev">⬅ חזרה לאפיון</a>
-        <a href="page3.html" class="btn-nav btn-next">הבא: שלב 3 ➔</a>
+        <a href="page3.html" class="btn-nav btn-next">הבא: שלב 3 (זרימת אישורים) ➔</a>
     </div>
 </body>
 </html>
