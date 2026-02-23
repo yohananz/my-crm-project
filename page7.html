@@ -16,6 +16,23 @@
         .input-group label { display: block; font-weight: bold; color: #1e40af; margin-bottom: 5px; font-size: 14px; }
         .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 15px; box-sizing: border-box; }
         .required-star { color: #ef4444; margin-right: 3px; }
+        
+        /* כפתור שליחה בתוך הטופס */
+        .submit-area { text-align: center; margin-top: 40px; padding: 20px; border-top: 1px dashed #e2e8f0; }
+        .btn-submit-form { 
+            background: #10b981; 
+            color: white; 
+            border: none; 
+            padding: 15px 50px; 
+            border-radius: 8px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+        }
+        .btn-submit-form:hover { background: #059669; transform: translateY(-2px); }
+
         .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; gap: 30px; direction: rtl; z-index: 1000; }
         .btn-nav { padding: 10px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; cursor: pointer; border: none; }
         .btn-prev { color: #1e40af; border: 1px solid #1e40af; background: white; }
@@ -76,20 +93,23 @@
         </div>
     </div>
 
-    <div class="footer-info" style="text-align:center; margin-top:20px; color:#94a3b8;">שלב 7 מתוך 9</div>
+    <div class="submit-area">
+        <button type="button" class="btn-submit-form" onclick="saveAndGo()">שלח פנייה למערכת ➔</button>
+        <p class="small text-muted mt-2">בלחיצה על הכפתור, הנתונים יסונכרנו ל-CRM</p>
+    </div>
 </div>
 
 <div class="nav-bar">
     <a href="page6.html" class="btn-nav btn-prev">⬅ חזרה לשלב 6</a>
     <div class="progress-text">שלב 7 מתוך 9</div>
-    <a href="page7-5.html" id="btn-save" class="btn-nav btn-next">המשך למיני-דאשבורד ➔</a>
+    <a href="page7-5.html" onclick="saveData()" class="btn-nav btn-next">המשך למיני-דאשבורד ➔</a>
 </div>
 
 
 
 <script>
-    document.getElementById('btn-save').addEventListener('click', function() {
-        // איסוף כל הערכים מהשדות לפי ה-ID שלהם
+    // פונקציה מרכזית לאיסוף ושמירת הנתונים
+    function saveData() {
         const userData = {
             fullName: document.getElementById('full-name').value || "לא הוזן",
             idNumber: document.getElementById('id-number').value || "לא הוזן",
@@ -101,11 +121,15 @@
             requestType: document.getElementById('request-type').value || "לא נבחר"
         };
         
-        // שמירת האובייקט המלא כ-JSON
         localStorage.setItem('fullCrmRecord', JSON.stringify(userData));
-        
-        console.log("נתוני ה-CRM נשמרו בהצלחה!");
-    });
+        console.log("נתוני ה-CRM נשמרו.");
+    }
+
+    // פונקציה לכפתור השליחה הירוק - שומרת ומעבירה דף
+    function saveAndGo() {
+        saveData();
+        window.location.href = 'page7-5.html';
+    }
 </script>
 
 </body>
