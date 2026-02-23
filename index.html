@@ -2,41 +2,129 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>שלב 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מטלת מיישם CRM - יוחנן צביליחובסקי</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* כאן נדביק את ה-CSS */
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .hub-container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.1);
+        }
+        .header-area { text-align: center; margin-bottom: 40px; }
+        .header-area h1 { color: #1e40af; font-weight: 800; }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .menu-card {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 25px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border-right: 6px solid #1e40af; /* פס כחול בצד */
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            border-color: #1e40af;
+            background: #f8faff;
+            box-shadow: 0 12px 20px rgba(30, 64, 175, 0.08);
+        }
+        .step-label {
+            color: #1e40af;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .card-title {
+            color: #1e293b;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .card-desc {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .start-btn {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            padding: 14px 50px;
+            background: #1e40af;
+            color: white;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .start-btn:hover { background: #1e3a8a; transform: scale(1.05); color: white; }
     </style>
 </head>
 <body>
+
 <div class="hub-container">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background: #f8fafc; }
-        .hub-container { max-width: 800px; margin: 60px auto; direction: rtl; font-family: 'Segoe UI', sans-serif; }
-        .main-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 10px solid #0d6efd; text-align: center; }
-        .step-list { text-align: right; margin: 30px 0; padding-right: 0; list-style: none; }
-        .step-item { background: #f1f5f9; margin-bottom: 10px; padding: 15px; border-radius: 10px; display: flex; align-items: center; gap: 15px; }
-        .step-num { background: #0d6efd; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        .btn-start { background: #0d6efd; color: white; padding: 15px 40px; font-size: 20px; font-weight: bold; border-radius: 50px; text-decoration: none; display: inline-block; transition: 0.3s; }
-        .btn-start:hover { background: #0b5ed7; transform: scale(1.05); color: white; }
-    </style>
-
-    <div class="main-card">
-        <h1 class="display-5 fw-bold text-primary">מטלת יישום והדרכה</h1>
-        <p class="lead text-muted">מוגש עבור: גלית, מנהלת יישומים - הוד השרון</p>
-        <hr>
-        <p>לפניך תהליך מלא של אפיון, יישום ובקרת מערכת CRM עירונית לניהול פניות ואירועים.</p>
-        
-        <ul class="step-list">
-            <li class="step-item"><div class="step-num">1</div> <span><b>אפיון תהליך:</b> סבב אישורים וסטטוסים חכם.</span></li>
-            <li class="step-item"><div class="step-num">2</div> <span><b>יישום מעשי (MOC):</b> טופס תושב עם ולידציות והדרכה.</span></li>
-            <li class="step-item"><div class="step-num">3</div> <span><b>ניהול ובקרה:</b> דאשבורד מנהלים עם עדכון נתונים חי.</span></li>
-            <li class="step-item"><div class="step-num">4</div> <span><b>Troubleshooting:</b> תחקור תקלות הרשאה.</span></li>
-        </ul>
-
-<a href="page1.html" class="btn-start">התחל בסקירת המטלה ➔</a>        
-        <div class="mt-4 text-muted small">יוגש ע"י: יוחנן צביליחובסקי</div>
+    <div class="header-area">
+        <h1>מטלת מיישם CRM</h1>
+        <p class="text-muted">יוחנן צביליחובסקי | פתרון מלא לאוטומציה וניהול מוקד עירוני</p>
     </div>
+
+    <div class="menu-grid">
+        <a href="page1.html" class="menu-card">
+            <span class="step-label">שלב 1</span>
+            <span class="card-title">אפיון התהליך</span>
+            <span class="card-desc">ניתוח המצב הקיים והגדרת שדות, סטטוסים וזרימת עבודה.</span>
+        </a>
+        <a href="page3.html" class="menu-card">
+            <span class="step-label">שלב 2</span>
+            <span class="card-title">זרימת אישורים</span>
+            <span class="card-desc">בניית לוגיקת Approval Flow אוטומטית למנהלים ודרג מקצועי.</span>
+        </a>
+        <a href="page5.html" class="menu-card">
+            <span class="step-label">שלב 3</span>
+            <span class="card-title">ניתוח נתונים (BI)</span>
+            <span class="card-desc">הגדרת מדדי KPI ולוחות בקרה להפקת תובנות ניהוליות.</span>
+        </a>
+        <a href="page6.html" class="menu-card">
+            <span class="step-label">שלב 4</span>
+            <span class="card-title">פתרון תקלות</span>
+            <span class="card-desc">מתודולוגיית Troubleshooting לניהול הרשאות ואבטחת מידע.</span>
+        </a>
+        <a href="page7.html" class="menu-card">
+            <span class="step-label">שלב 5</span>
+            <span class="card-title">טופס דיגיטלי</span>
+            <span class="card-desc">אבטיפוס פעיל להזנת נתונים וסנכרון בזמן אמת.</span>
+        </a>
+        <a href="page8.html" class="menu-card">
+            <span class="step-label">שלב 6</span>
+            <span class="card-title">לוח בקרה מנהל</span>
+            <span class="card-desc">מבט כולל על כלל הפניות במערכת וניהול עומסים.</span>
+        </a>
+    </div>
+
+    <a href="page1.html" class="start-btn shadow">התחל בסקירה רציפה ➔</a>
 </div>
-    </body>
+
+</body>
 </html>
